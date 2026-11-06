@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The World of Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #3b2a6b;
+    --text: #3a3350;
+    --pink: #e8509a;
+    --purple: #7b4fd1;
+    --green: #3f9a54;
+    --card-pink: #fdd9e8;
+    --card-yellow: #fff1c4;
+    --card-purple: #e4d8fb;
+    --card-green: #d8f2d8;
+    --head: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: var(--body);
+    color: var(--text);
+    background: linear-gradient(#fbd6e6 0, #e6f6fb 260px, #e6f6fb 70%, #efe3fb 100%);
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  :focus-visible { outline: 3px solid var(--purple); outline-offset: 3px; border-radius: 12px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  header { padding: 16px 0; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--head); line-height: .9; }
+  .logo img { width: 56px; height: 56px; object-fit: contain; }
+  .logo small { display: block; font-size: 1.3rem; font-weight: 800; color: var(--ink); }
+  .logo strong { display: block; font-size: 2.3rem; font-weight: 800; color: var(--pink); letter-spacing: 1px; }
+  nav { display: flex; gap: 6px; background: rgba(255,255,255,.75); border-radius: 999px; padding: 6px; flex-wrap: wrap; }
+  nav a { font-family: var(--head); font-weight: 700; padding: 8px 18px; border-radius: 999px; color: var(--ink); transition: background .2s; }
+  nav a:hover { background: var(--card-purple); }
+  nav a[aria-current="page"] { background: var(--pink); color: #fff; }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; padding: 20px 0 40px; }
+  .hero h1 { font-family: var(--head); font-weight: 800; color: var(--ink); line-height: 1.05; }
+  .hero h1 .small { display: block; font-size: 1.6rem; }
+  .hero h1 .big { display: block; font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--purple); text-shadow: 3px 3px 0 #fff; }
+  .ribbon { display: inline-block; margin: 14px 0; padding: 6px 22px; background: #fbe59a; font-family: var(--head); font-weight: 700; color: var(--ink); transform: rotate(-2deg); border-radius: 6px; }
+  .hero p { max-width: 440px; margin-bottom: 20px; }
+  .btn { display: inline-block; font-family: var(--head); font-weight: 700; color: #fff; padding: 10px 26px; border-radius: 999px; box-shadow: 0 4px 0 rgba(0,0,0,.15); transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-pink { background: var(--pink); }
+
+  .scene { position: relative; min-height: 400px; }
+  .bubble { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; border-radius: 50%; font-family: var(--head); font-weight: 700; color: var(--ink); font-size: .85rem; }
+  .bubble img { width: 48px; height: 48px; object-fit: contain; }
+  .b-setting   { top: 0;    left: 18%; width: 130px; height: 110px; background: #cfeecf; }
+  .b-plot      { top: 70px; left: 42%; width: 150px; height: 100px; background: #fdd9e8; }
+  .b-conflict  { top: 20px; right: 0;  width: 130px; height: 100px; background: #f6c6d8; }
+  .b-theme     { top: 140px; right: 0; width: 100px; height: 100px; background: #fff1a8; }
+  .b-character { top: 90px; left: 0;   width: 130px; height: 100px; background: #d9c8f7; }
+  .hero-kids { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: min(100%, 420px); height: 220px; object-fit: contain; object-position: bottom; }
+
+  /* Features */
+  h2 { font-family: var(--head); font-weight: 800; color: var(--ink); text-align: center; font-size: 2rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  h2 img { width: 28px; height: 28px; object-fit: contain; }
+  .sub { text-align: center; margin-bottom: 24px; font-weight: 700; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 56px; }
+  .card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px 16px; border-radius: 22px; transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(80,50,140,.18); }
+  .card .icon { width: 96px; height: 96px; object-fit: contain; }
+  .card h3 { font-family: var(--head); font-weight: 800; font-size: 1.6rem; margin: 6px 0; }
+  .card p { flex: 1; margin-bottom: 16px; font-weight: 600; }
+  .card .btn { font-size: .95rem; padding: 8px 20px; }
+  .c-lessons { background: var(--card-pink); } .c-lessons h3 { color: var(--pink); } .c-lessons .btn { background: var(--pink); }
+  .c-games { background: var(--card-yellow); } .c-games h3 { color: #d98f12; } .c-games .btn { background: #f2a62c; }
+  .c-quiz { background: var(--card-purple); } .c-quiz h3 { color: var(--purple); } .c-quiz .btn { background: var(--purple); }
+  .c-activities { background: var(--card-green); } .c-activities h3 { color: var(--green); } .c-activities .btn { background: var(--green); }
+
+  /* Why */
+  .why { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 24px 0 40px; }
+  .why div { text-align: center; padding: 18px 12px; border-radius: 24px; font-size: .92rem; font-weight: 600; }
+  .why img { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 6px; }
+  .why b { display: block; font-family: var(--head); font-size: 1.15rem; color: var(--ink); }
+  .why div:nth-child(1) { background: #d4ecf7; }
+  .why div:nth-child(2) { background: #fdd9e8; }
+  .why div:nth-child(3) { background: #fff1c4; }
+  .why div:nth-child(4) { background: #e4d8fb; }
+  .why div:nth-child(5) { background: #d8f2d8; }
+
+  .remember { display: flex; align-items: center; gap: 18px; padding: 18px 28px; background: #e8defa; border-radius: 40px; margin-bottom: 40px; flex-wrap: wrap; }
+  .remember img { width: 64px; height: 64px; object-fit: contain; }
+  .remember .tag { font-family: var(--head); font-weight: 800; font-size: 1.5rem; color: #fff; background: var(--purple); padding: 4px 22px; border-radius: 12px; border: 2px dashed #fff; transform: rotate(-2deg); }
+  .remember q { flex: 1; min-width: 220px; font-family: var(--head); font-weight: 700; font-size: 1.3rem; color: var(--ink); text-align: center; }
+
+  footer { background: var(--purple); color: #fff; padding: 22px 20px; font-family: var(--head); font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; text-align: center; }
+  footer img { width: 20px; height: 20px; object-fit: contain; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; text-align: center; }
+    .hero p { margin-inline: auto; }
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .why { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .cards, .why { grid-template-columns: 1fr; }
+    header .wrap { justify-content: center; }
+    .scene { min-height: 440px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="The World of Stories home">
+      <span><small>The World of</small><strong>STORIES</strong></span>
+    </a>
+    <nav aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="lessons.html">Lessons</a>
+      <a href="games.html">Games</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="activities.html">Activities</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <h1>
+          <span class="small">Discover the</span>
+          <span class="big">Power of the Elements of the Story</span>
+        </h1>
+        <div class="ribbon">Master the Force of Narrative Building Blocks!</div>
+        <p>Explore how characters, setting, plot, conflict, and theme combine to create powerful stories. Learn to harness these elements.</p>
+        <a class="btn btn-pink" href="lessons.html">Start Discovering →</a>
+      </div>
+
+      <div class="scene">
+        <div class="bubble b-setting"><img src="images/bubble-setting.png" alt="">SETTING</div>
+        <div class="bubble b-plot"><img src="images/bubble-plot.png" alt="">PLOT</div>
+        <div class="bubble b-conflict"><img src="images/bubble-conflict.png" alt="">CONFLICT</div>
+        <div class="bubble b-theme"><img src="images/bubble-theme.png" alt="">THEME</div>
+        <div class="bubble b-character"><img src="images/bubble-character.png" alt="">CHARACTER</div>
+        <img class="hero-kids" src="images/hero-kids.png" alt="Three children reading and sharing stories">
+      </div>
+    </section>
+
+    <section aria-labelledby="features">
+      <h2 id="features">Explore Our Features</h2>
+      <p class="sub">Choose a section to start your story building adventure!</p>
+      <div class="cards">
+        <a class="card c-lessons" href="lessons.html">
+          <img class="icon" src="images/icon-lessons.png" alt="">
+          <h3>Lessons</h3>
+          <p>Learn about characters, setting, plot, conflict, and theme.</p>
+          <span class="btn">Go to Lessons →</span>
+        </a>
+        <a class="card c-games" href="games.html">
+          <img class="icon" src="images/icon-games.png" alt="">
+          <h3>Games</h3>
+          <p>Test your skills with narrative building games.</p>
+          <span class="btn">Play Games →</span>
+        </a>
+        <a class="card c-quiz" href="quiz.html">
+          <img class="icon" src="images/icon-quiz.png" alt="">
+          <h3>Quiz</h3>
+          <p>Check your knowledge of story parts.</p>
+          <span class="btn">Take Quiz →</span>
+        </a>
+        <a class="card c-activities" href="activities.html">
+          <img class="icon" src="images/icon-activities.png" alt="">
+          <h3>Activities</h3>
+          <p>Show your story creations and practice elements.</p>
+          <span class="btn">Start Activities →</span>
+        </a>
+      </div>
+    </section>
+
+    <section aria-labelledby="why">
+      <h2 id="why">Why Are Stories Important?</h2>
+      <div class="why">
+        <div><img src="images/why-empathy.png" alt=""><b>Empathy</b>They help us connect with and understand others' feelings.</div>
+        <div><img src="images/why-creativity.png" alt=""><b>Creativity</b>They inspire our imagination and critical thinking.</div>
+        <div><img src="images/why-communication.png" alt=""><b>Communication</b>They help us share ideas and pass down knowledge.</div>
+        <div><img src="images/why-problem-solving.png" alt=""><b>Problem-Solving</b>They show us different ways to approach challenges.</div>
+        <div><img src="images/why-culture.png" alt=""><b>Cultural Insight</b>They teach us about different times and cultures.</div>
+      </div>
+
+      <div class="remember">
+        <span class="tag">Remember:</span>
+        <q>Stories are the foundation of understanding and empathy!</q>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  Small words. Big stories. Keep dreaming!
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lessons | The World of Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #3b2a6b;
+    --text: #3a3350;
+    --pink: #e8509a;
+    --purple: #7b4fd1;
+    --green: #3f9a54;
+    --card-pink: #fdd9e8;
+    --card-yellow: #fff1c4;
+    --card-purple: #e4d8fb;
+    --card-green: #d8f2d8;
+    --head: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: var(--body);
+    color: var(--text);
+    background: linear-gradient(#fbd6e6 0, #e6f6fb 260px, #e6f6fb 70%, #efe3fb 100%);
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  :focus-visible { outline: 3px solid var(--purple); outline-offset: 3px; border-radius: 12px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  header { padding: 16px 0; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--head); line-height: .9; }
+  .logo img { width: 56px; height: 56px; object-fit: contain; }
+  .logo small { display: block; font-size: 1.3rem; font-weight: 800; color: var(--ink); }
+  .logo strong { display: block; font-size: 2.3rem; font-weight: 800; color: var(--pink); letter-spacing: 1px; }
+  nav { display: flex; gap: 6px; background: rgba(255,255,255,.75); border-radius: 999px; padding: 6px; flex-wrap: wrap; }
+  nav a { font-family: var(--head); font-weight: 700; padding: 8px 18px; border-radius: 999px; color: var(--ink); transition: background .2s; }
+  nav a:hover { background: var(--card-purple); }
+  nav a[aria-current="page"] { background: var(--pink); color: #fff; }
+
+  .page-hero { text-align: center; padding: 30px 0 30px; }
+  .page-hero h1 { font-family: var(--head); font-weight: 800; color: var(--ink); font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; }
+  .page-hero h1 span { color: var(--purple); text-shadow: 3px 3px 0 #fff; }
+  .page-hero p { max-width: 640px; margin: 14px auto 0; font-weight: 600; }
+
+  .panel { background: #fff; border-radius: 26px; padding: 28px; margin-bottom: 26px; box-shadow: 0 8px 22px rgba(80,50,140,.10); }
+  .panel h2 { font-family: var(--head); font-weight: 800; color: var(--ink); font-size: 1.7rem; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .panel h2 img { width: 30px; height: 30px; object-fit: contain; }
+  .panel p + p { margin-top: 10px; }
+  .panel ul { margin: 10px 0 0 20px; }
+  .panel li { margin-bottom: 6px; font-weight: 600; }
+
+  .element-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 16px; }
+  .element { border-radius: 22px; padding: 20px; }
+  .element h3 { font-family: var(--head); font-weight: 800; font-size: 1.4rem; margin-bottom: 6px; }
+  .element p { font-weight: 600; }
+  .element .example { display: block; margin-top: 10px; font-size: .92rem; font-weight: 700; color: var(--ink); background: rgba(255,255,255,.7); padding: 8px 12px; border-radius: 12px; }
+  .e-char { background: var(--card-purple); } .e-char h3 { color: var(--purple); }
+  .e-set { background: var(--card-green); } .e-set h3 { color: var(--green); }
+  .e-plot { background: var(--card-pink); } .e-plot h3 { color: var(--pink); }
+  .e-conf { background: #f6c6d8; } .e-conf h3 { color: #c43a7c; }
+  .e-theme { background: var(--card-yellow); } .e-theme h3 { color: #c98a10; }
+
+  .plot-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px; }
+  .plot-steps div { text-align: center; padding: 16px 10px; border-radius: 20px; font-size: .88rem; font-weight: 600; }
+  .plot-steps b { display: block; font-family: var(--head); font-size: 1.05rem; color: var(--ink); margin-bottom: 4px; }
+  .plot-steps div:nth-child(1) { background: #d4ecf7; }
+  .plot-steps div:nth-child(2) { background: #fdd9e8; }
+  .plot-steps div:nth-child(3) { background: #fff1c4; }
+  .plot-steps div:nth-child(4) { background: #e4d8fb; }
+  .plot-steps div:nth-child(5) { background: #d8f2d8; }
+
+  .table-wrap { overflow-x: auto; margin-top: 14px; }
+  table { width: 100%; border-collapse: collapse; font-weight: 600; }
+  th, td { padding: 12px 14px; text-align: left; border-bottom: 2px solid #f0eaff; }
+  th { font-family: var(--head); font-weight: 800; color: var(--ink); background: #f4eefe; }
+  tr:nth-child(even) td { background: #faf7ff; }
+
+  .remember { display: flex; align-items: center; gap: 18px; padding: 18px 28px; background: #e8defa; border-radius: 40px; margin-bottom: 26px; flex-wrap: wrap; }
+  .remember img { width: 64px; height: 64px; object-fit: contain; }
+  .remember .tag { font-family: var(--head); font-weight: 800; font-size: 1.5rem; color: #fff; background: var(--purple); padding: 4px 22px; border-radius: 12px; border: 2px dashed #fff; transform: rotate(-2deg); }
+  .remember q { flex: 1; min-width: 220px; font-family: var(--head); font-weight: 700; font-size: 1.2rem; color: var(--ink); text-align: center; }
+
+  .btn { display: inline-block; font-family: var(--head); font-weight: 700; color: #fff; padding: 10px 26px; border-radius: 999px; box-shadow: 0 4px 0 rgba(0,0,0,.15); transition: transform .15s; border: none; cursor: pointer; font-size: 1rem; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-pink { background: var(--pink); }
+  .btn-purple { background: var(--purple); }
+  .cta-row { text-align: center; margin: 10px 0 40px; }
+
+  footer { background: var(--purple); color: #fff; padding: 22px 20px; font-family: var(--head); font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; text-align: center; }
+
+  @media (max-width: 900px) {
+    .element-grid { grid-template-columns: 1fr; }
+    .plot-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    header .wrap { justify-content: center; }
+    .plot-steps { grid-template-columns: 1fr; }
+    .panel { padding: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="The World of Stories home">
+      <span><small>The World of</small><strong>STORIES</strong></span>
+    </a>
+    <nav aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="lessons.html" aria-current="page">Lessons</a>
+      <a href="games.html">Games</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="activities.html">Activities</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="page-hero">
+      <h1>Let's Explore the <span>Elements of a Story!</span></h1>
+      <p>Welcome to the world of stories! Discover the important parts that make a story complete and interesting. Get ready to become a Story Explorer!</p>
+    </section>
+
+    <section class="panel" aria-labelledby="what">
+      <h2 id="what">What Are the Elements of a Story?</h2>
+      <p>The elements of a story are the important parts that work together to make a narrative. They help readers understand who is in the story, where and when it happens, what events take place, what problem the characters face, and what message the story shares.</p>
+      <p>The five elements covered in this lesson are <b>characters</b>, <b>setting</b>, <b>plot</b>, <b>conflict</b>, and <b>theme</b>.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="objectives">
+      <h2 id="objectives">Learning Objectives</h2>
+      <p>After studying this lesson, learners are expected to:</p>
+      <ul>
+        <li>Identify the five elements of a story.</li>
+        <li>Describe the meaning of characters, setting, plot, conflict, and theme.</li>
+        <li>Recognize the elements of a story in a short narrative.</li>
+        <li>Explain how the story elements work together.</li>
+        <li>Create or retell a simple story using the five elements.</li>
+      </ul>
+    </section>
+
+    <!-- Video section added after Learning Objectives -->
+    <section class="panel" aria-labelledby="lesson-video">
+      <h2 id="lesson-video">Watch: Story Elements Explained</h2>
+      <p>Watch this short video to see the five elements of a story in action before you continue reading.</p>
+      <div class="video-wrap">
+        <video controls width="100%" preload="metadata">
+          <source src="videos/story-elements.mp4" type="video/mp4">
+          Your browser does not support the video tag. You can
+          <a href="videos/story-elements.mp4">download the video</a> instead.
+        </video>
+      </div>
+    </section>
+    <!-- End video section -->
+
+    <section aria-labelledby="five">
+      <div class="panel" style="padding-bottom:10px;">
+        <h2 id="five"><img src="images/icon-activities.png" alt="">The Five Elements of a Story</h2>
+      </div>
+      <div class="element-grid" style="margin-bottom:26px;">
+        <div class="element e-char">
+          <h3>1. Characters</h3>
+          <p>Characters are the people, animals, or imaginary beings who take part in a story. The main character is the person or figure the story mostly follows. Other characters may help the main character or take part in the events.</p>
+          <span class="example">Examples: A brave girl, a talking rabbit, a kind teacher, or a group of friends.</span>
+        </div>
+        <div class="element e-set">
+          <h3>2. Setting</h3>
+          <p>The setting tells where and when a story happens. It may describe a place such as a school, forest, or town, and a time such as morning, nighttime, long ago, or the present day.</p>
+          <span class="example">Examples: A story that happens in a school during lunchtime; a story set in a forest on a rainy afternoon.</span>
+        </div>
+        <div class="element e-plot">
+          <h3>3. Plot</h3>
+          <p>The plot is the sequence of events in a story. It tells what happens from the beginning to the end. A plot commonly has five parts:</p>
+          <span class="example">Beginning, Rising Action, Climax, Falling Action, and Resolution.</span>
+        </div>
+        <div class="element e-conf">
+          <h3>4. Conflict</h3>
+          <p>Conflict is the main problem or struggle in a story. It gives the characters something to face or solve. A conflict may happen between characters, between a character and nature, or within a character who must make a difficult decision.</p>
+          <span class="example">Examples: Two friends disagree; a child gets lost during a storm; a character must decide whether to tell the truth.</span>
+        </div>
+        <div class="element e-theme" style="grid-column: 1 / -1;">
+          <h3>5. Theme</h3>
+          <p>The theme is the central message, lesson, or big idea of a story. It helps readers think about what the story teaches or what it says about life.</p>
+          <span class="example">Examples: Honesty is important; kindness can make a difference; teamwork helps people overcome challenges.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="plotparts">
+      <h2 id="plotparts"><img src="images/bubble-plot.png" alt="">The Five Parts of the Plot</h2>
+      <div class="plot-steps">
+        <div><b>Beginning</b>Introduces the characters and setting and shows how the story starts.</div>
+        <div><b>Rising Action</b>Presents events that build the problem or make the story more exciting.</div>
+        <div><b>Climax</b>The most exciting or important turning point of the story.</div>
+        <div><b>Falling Action</b>Shows what happens after the climax as the problem begins to settle.</div>
+        <div><b>Resolution</b>Tells how the story ends and how the problem is resolved.</div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="everyday">
+      <h2 id="everyday"><img src="images/bubble-setting.png" alt="">Elements of a Story in Everyday Reading</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Story Element</th><th>What It Tells Us</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>Characters</b></td><td>Who is in the story?</td><td>Mia and her younger brother</td></tr>
+            <tr><td><b>Setting</b></td><td>Where and when does it happen?</td><td>At their school one rainy morning</td></tr>
+            <tr><td><b>Plot</b></td><td>What happens in the story?</td><td>Mia finds a lost puppy and looks for its owner</td></tr>
+            <tr><td><b>Conflict</b></td><td>What problem must be faced?</td><td>The puppy is lost and cannot find its home</td></tr>
+            <tr><td><b>Theme</b></td><td>What message does the story share?</td><td>Kindness means helping those in need</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="important">
+      <h2 id="important"><img src="images/why-empathy.png" alt="">Why Are the Elements of a Story Important?</h2>
+      <ul>
+        <li>They help readers understand and organize the events in a story.</li>
+        <li>They make it easier to identify the characters, place, problem, and message.</li>
+        <li>They help readers explain and discuss what they have read.</li>
+        <li>They develop comprehension, imagination, and critical-thinking skills.</li>
+        <li>They guide writers in creating clear and interesting stories.</li>
+      </ul>
+    </section>
+
+    <div class="remember">
+      <span class="tag">Remember:</span>
+      <q>Characters = who; Setting = where and when; Plot = what happens; Conflict = the problem; Theme = the message.</q>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-pink" href="quiz.html">Answer the Questions →</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Small words. Big stories. Keep dreaming!
+</footer>
+
+</body>
+</html>
